@@ -41,7 +41,10 @@ public class SpookyMansion implements GameWorld {
 				"Something rustles in the rafters as you enter the attic. Creepy.\n" + "It's big up here."));
 		attic.addExit(new Exit("entranceHall", "There are stairs leading down."));
 		attic.addExit(new Exit("attic2", "There is more through an archway."));
+		attic.addExit(new Exit("gameRoom", "You see a inconspicuous door and hear a lot of mysterious gunshots and yelling "));
 
+		Place gameRoom = insert(Place.create("gameRoom", "You see a lot of screens playing various video games but there are no people and no other doors. Not much here."));
+		gameRoom.addExit(new Exit("attic", "Back to the attic."));
 		Place attic2 = insert(Place.create("attic2", "There's definitely a bat in here somewhere.\n"
 				+ "This part of the attic is brighter, so maybe you're safe here."));
 		attic2.addExit(new Exit("attic", "There is more back through the archway."));
@@ -57,19 +60,42 @@ public class SpookyMansion implements GameWorld {
 		
 		Place secretRoom = insert(Place.create("secretRoom", "You have found the secret room."));
 		secretRoom.addExit(new Exit("hallway0", "There is a long hallway."));
+		secretRoom.addExit(new Exit("basement", "There is a doorway that leads to a much bigger room"));
 		
-		int hallwayDepth = 3;
+		int hallwayDepth = 8;
 		int lastHallwayPart = hallwayDepth - 1;
 		for (int i=0; i<hallwayDepth; i++) {
 			Place hallwayPart = insert(Place.create("hallway"+i, "This is a very long hallway."));
 			if (i == 0) {
 				hallwayPart.addExit(new Exit("secretRoom", "Go back."));
+				hallwayPart.addExit(new Exit("hallway"+0, "Go forward"));
+				i=i-1;
 			} else {
 				hallwayPart.addExit(new Exit("hallway"+(i-1), "Go back."));
 			}
-			if (i != lastHallwayPart) {
-				hallwayPart.addExit(new Exit("hallway"+(i+1), "Go forward."));
-			} else {
+			//Figure out if this works when this can run
+			if (i == 1) {
+				hallwayPart.addExit(new Exit("hallway" + (i-1), "There's a number scratched on the wall ahead. You make out the number 2"));	
+			}
+			if (i == 2) {
+				hallwayPart.addExit(new Exit("hallway" + (i-1), "There's a number scratched on the wall ahead. You make out the number 3"));	
+			}
+			if (i == 3) {
+				hallwayPart.addExit(new Exit("hallway" + (i-1), "There's a number scratched on the wall ahead. You make out the number 4"));	
+			}
+			if (i == 4) {
+				hallwayPart.addExit(new Exit("hallway" + (i-1), "There's a number scratched on the wall ahead. You make out the number 5"));	
+			}
+			if (i == 5) {
+				hallwayPart.addExit(new Exit("hallway" + (i-1), "There's a number scratched on the wall ahead. You make out the number 6"));	
+			}
+			if (i == 6) {
+				hallwayPart.addExit(new Exit("hallway" + (i-1), "There's a number scratched on the wall ahead. You make out the number 7"));	
+			}
+			if (i == 7) {
+				hallwayPart.addExit(new Exit("hallway" + (i-1), "There's a number scratched on the wall ahead. You make out the number 8"));	
+			}
+			if (i == lastHallwayPart) {
 				hallwayPart.addExit(new Exit("crypt", "There is darkness ahead."));
 			}
 		}
